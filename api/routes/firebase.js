@@ -6,8 +6,7 @@ const {getFirestore} = require("firebase-admin/firestore");
 var serviceAccount = require("../permissions.json");
 
 
-const app = initializeApp({credential: cert(serviceAccount)
-});
+const app = initializeApp({credential: cert(serviceAccount)});
 const db = getFirestore(app);
 
 //const db = admin.firestore();
