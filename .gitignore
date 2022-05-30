@@ -24,3 +24,5 @@ yarn-error.log*
 
 .env
 permissions.json
+package-lock.json
+api/node_modules
