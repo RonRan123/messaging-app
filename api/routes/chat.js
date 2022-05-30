@@ -62,5 +62,19 @@ router.post('/message', async(req, res) => {
     }
 })
 
+router.delete('/message', async(req, res) => {
+    try {
+        //console.log(req.query)
+        const ref = await db.collection('messages').doc(req.query.id).delete()
+        return res.status(200).json({
+            message: "Document deleted"
+        })
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).send(err)
+    }
+})
+
 
 module.exports = router;

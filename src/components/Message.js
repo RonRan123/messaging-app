@@ -2,16 +2,21 @@ import { Button, IconButton, Paper, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react'
+import axios from 'axios'
 
 function Message(props) {
   const {username, text, createdAt, doc_id} = props.msg;
 
-  const onDelete = () => {
-      alert('you are about to delete. Are you sure?')
+  const onDelete = (id) => {
+      //alert('you are about to delete. Are you sure?')
+      //console.log(id)
+      axios.delete('http://localhost:9000/chat/message?id=' + id)
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   }
 
 
-  console.log(props);
+  //console.log(props);
   let date = new Date(null);
   date.setSeconds(createdAt);
 //   let time = `${date.getMonth() +1 }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
@@ -23,7 +28,7 @@ function Message(props) {
                 <Typography variant='h5'>Message from {username} at {time}</Typography>
                 <Typography variant='h4'>{text}</Typography>
             </div>
-            <IconButton color='primary' onClick={onDelete}>
+            <IconButton color='primary' onClick={() => onDelete(doc_id)}>
                 <DeleteIcon />
             </IconButton>
           </Box>          
