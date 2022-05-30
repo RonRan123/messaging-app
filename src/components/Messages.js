@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Message from './Message';
 
-function Messages() {
+function Messages(props) {
   const [messages, setMessages] = useState();
   useEffect( () => {
     async function fetchMessages(){

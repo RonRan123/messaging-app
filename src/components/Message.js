@@ -1,3 +1,4 @@
+import { Paper, TextField, Typography } from '@mui/material';
 import React from 'react'
 
 function Message(props) {
@@ -8,10 +9,10 @@ function Message(props) {
 //   let time = `${date.getMonth() +1 }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
   let time = date.toLocaleDateString('en-us', { weekday:"short", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric"}) 
   return (
-    <div>
-        <h3>Message from {username} at {time}</h3>
-        <p>{text}</p>
-    </div>
+      <Paper>
+          <Typography variant='h5'>Message from {username} at {time}</Typography>
+          <Typography variant='h4'>{text}</Typography>
+      </Paper>
   )
 }
 
