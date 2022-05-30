@@ -18,7 +18,7 @@ function Message(props) {
 
   //console.log(props);
   let date = new Date(null);
-  date.setSeconds(createdAt._seconds);
+  date.setSeconds(createdAt);
 //   let time = `${date.getMonth() +1 }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
   let time = date.toLocaleDateString('en-us', { timeZone:'UTC', weekday:"short", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric"}) 
   return (
