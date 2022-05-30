@@ -1,7 +1,7 @@
 // https://indepth.dev/posts/1084/building-an-api-with-firebase#database-calls
 var admin = require("firebase-admin");
 
-var serviceAccount = require("./permission.json");
+var serviceAccount = require("./permissions.json");
 
 
 admin.initializeApp({
