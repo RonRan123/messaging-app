@@ -3,7 +3,6 @@ const cors = require("cors");
 var router = express.Router();
 const db = require("./firebase");
 
-
 router.get("/", function(req, res, next) {
     res.send("Messages API is working!");
 });
@@ -21,6 +20,24 @@ router.get("/messages",  async (req, res) => {
     catch(error){
         console.log(error);
         return res.status(500).send(error);
+    }
+})
+
+router.post('/message', async(req, res) => {
+    try{
+        const ref = await db.collection('messages').add({
+            username: req.body.username,
+            createdAt: req.body.dateCreated,
+            text: req.body.message 
+        });
+        console.log("Document written with ID: ", ref.id);
+        return res.status(201).json({
+            message: 'Post successful'
+        })
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).send(err)
     }
 })
 

@@ -11,7 +11,7 @@ function Messages() {
         throw Error(body.message) 
       }
       setMessages(body);
-      console.log(body);
+      //console.log(body);
     }
     fetchMessages();
   } ,[])
