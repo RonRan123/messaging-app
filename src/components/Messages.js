@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import Message from './Message';
 
@@ -17,7 +18,7 @@ function Messages(props) {
   } ,[])
   return (
     <div>
-      <h1>Messages!</h1>
+      <Typography variant='h2'>Messages!</Typography>
       {messages && messages.map(msg => <Message key={msg.doc_id} msg={msg}/>)}
     </div>
   )

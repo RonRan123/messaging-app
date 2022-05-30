@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 import Messages from './Messages'
 import TextBox from './TextBox'
@@ -5,9 +6,9 @@ import TextBox from './TextBox'
 function Chat() {
   return (
     <div>
-        <h1>Chat!</h1>
-        <Messages />
-        <TextBox />
+      <Typography variant='h1'>Chat!</Typography>
+      <Messages />
+      <TextBox />
     </div>
   )
 }

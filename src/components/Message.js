@@ -1,17 +1,32 @@
-import { Paper, TextField, Typography } from '@mui/material';
+import { Button, IconButton, Paper, TextField, Typography } from '@mui/material';
+import { Box } from '@mui/system';
+import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react'
 
 function Message(props) {
-  const {username, text, createdAt} = props.msg;
+  const {username, text, createdAt, doc_id} = props.msg;
+
+  const onDelete = () => {
+      alert('you are about to delete. Are you sure?')
+  }
+
+
   console.log(props);
   let date = new Date(null);
   date.setSeconds(createdAt._seconds);
 //   let time = `${date.getMonth() +1 }/${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
-  let time = date.toLocaleDateString('en-us', { weekday:"short", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric"}) 
+  let time = date.toLocaleDateString('en-us', { timeZone:'UTC', weekday:"short", year:"numeric", month:"short", day:"numeric", hour:"numeric", minute:"numeric"}) 
   return (
       <Paper>
-          <Typography variant='h5'>Message from {username} at {time}</Typography>
-          <Typography variant='h4'>{text}</Typography>
+          <Box display='flex' alignItems='center' justifyContent='center'>
+            <div>
+                <Typography variant='h5'>Message from {username} at {time}</Typography>
+                <Typography variant='h4'>{text}</Typography>
+            </div>
+            <IconButton color='primary' onClick={onDelete}>
+                <DeleteIcon />
+            </IconButton>
+          </Box>          
       </Paper>
   )
 }
