@@ -22,7 +22,6 @@ router.get("/messages",  async (req, res) => {
     }
 })
 
-<<<<<<< HEAD
 router.get('/message/:msg_id', async (req, res) => {
     try{
         const document = db.collection('messages').doc(req.params.msg_id);
@@ -45,7 +44,6 @@ router.get('/message/:msg_id', async (req, res) => {
 //         return res.status(500).send(error);
 //     }
 // })
-=======
 router.post('/message', async(req, res) => {
     try{
         const ref = await db.collection('messages').add({
@@ -64,6 +62,19 @@ router.post('/message', async(req, res) => {
     }
 })
 
->>>>>>> d80b6bb61c5cff5c5dcbd4504dcd10f185ed0a3b
+router.delete('/message', async(req, res) => {
+    try {
+        //console.log(req.query)
+        const ref = await db.collection('messages').doc(req.query.id).delete()
+        return res.status(200).json({
+            message: "Document deleted"
+        })
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).send(err)
+    }
+})
+
 
 module.exports = router;

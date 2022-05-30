@@ -9,7 +9,7 @@ const [message, setMessage] = useState('')
 const [user, setUser] = useState('')
 
 const postMessage = (msg) => {
-    const time = new Date()
+    const time = Date.now()
 
     axios.post('/chat/message', {
         message: msg,
