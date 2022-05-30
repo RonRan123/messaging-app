@@ -12,7 +12,7 @@ function Messages(props) {
         throw Error(body.message) 
       }
       setMessages(body);
-      console.log(body);
+      //console.log(body);
     }
     fetchMessages();
   } ,[])
