@@ -1,14 +1,16 @@
+const { initializeApp, cert } = require("firebase-admin/app"); 
+const {getFirestore} = require("firebase-admin/firestore");
 // https://indepth.dev/posts/1084/building-an-api-with-firebase#database-calls
-var admin = require("firebase-admin");
+// var admin = require("firebase-admin");
 
 var serviceAccount = require("./permissions.json");
 
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+const app = initializeApp({
+  credential: cert(serviceAccount),
   databaseURL: "https://fir-api-9a206..firebaseio.com"
 });
-const db = admin.firestore();
+const db = getFirestore(app);
 
 //const db = admin.firestore();
 // const db = admin;
