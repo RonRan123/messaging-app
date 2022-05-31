@@ -12,13 +12,12 @@ function Message(props) {
   const [isEditing, setIsEditing] = useState(false)
   const [currVal, setCurrVal] = useState(text);
 
-  const onDelete = (doc_id) => {
+  const onDelete = (did) => {
       //alert('you are about to delete. Are you sure?')
       //console.log(id)
-      axios.delete('/chat/message', {
-        id: doc_id,
-      })
+      axios.delete('/chat/message/' + doc_id)
       .then(res => console.log(res))
+      .then(() => update())
       .catch(err => console.log(err))
   }
 
@@ -32,9 +31,8 @@ function Message(props) {
     axios.put('/chat/message', {
       id: doc_id,
       message: e.target.value
-    }).catch(err => console.log(err))
+    }).then(() => update()).catch(err => console.log(err))
     setIsEditing(false)
-    update();
   }
   }
 

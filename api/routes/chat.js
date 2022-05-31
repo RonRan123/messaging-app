@@ -91,10 +91,10 @@ router.put('/message', async(req, res) => {
     }
 })
 
-router.delete('/message', async(req, res) => {
+router.delete('/message/:id', async(req, res) => {
     try {
-        console.log(req.query)
-        const res = await deleteDoc(doc(db, "messages", req.query.id))
+        console.log(req.params)
+        const response = await deleteDoc(doc(db, "messages", req.params.id));
         // const ref = await db.collection('messages').doc(req.query.id).delete()
         return res.status(200).json({
             message: "Document deleted"

@@ -5,6 +5,7 @@ import axios from 'axios'
 
 
 function TextBox(props) {
+  const {update} = props;
   const onSubmit = (e) => {
     e.preventDefault();
     const time = Date.now()/1000;
@@ -17,6 +18,7 @@ function TextBox(props) {
 
     axios.post('/chat/message', msg)
     .then(res => console.log(res))
+    .then(() => update())
     .catch(err => console.log(err))
 }
 
