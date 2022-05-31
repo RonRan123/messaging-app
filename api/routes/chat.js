@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require("./firebase");
-const {getDocs, collection, doc, getDoc, addDoc, deleteDoc} = require("firebase/firestore")
+const {getDocs, collection, doc, getDoc, addDoc, setDoc,  deleteDoc, updateDoc} = require("firebase/firestore")
 
 router.get("/", function(req, res, next) {
     res.send("Messages API is working!");
@@ -73,14 +73,19 @@ router.post('/message', async(req, res) => {
 
 router.put('/message', async(req, res) => {
     try {
-        const ref = db.collection('messages').doc(req.body.id)
-        const update = await ref.update({text: req.body.message})
+        // const res = await setDoc(doc(db, "messages", req))
+        // const ref = db.collection('messages').doc(req.body.id)
+
+        const msgRef = doc(db, "messages", req.body.id);
+
+        const update = await updateDoc(msgRef,{text: req.body.message} )
+        // const update = await ref.update()
 
         return res.status(200).json({
             message: 'Message updated'
         })
     }
-    catch {
+    catch(err) {
         console.log(err)
         return res.status(500).send(err)
     }
@@ -88,7 +93,7 @@ router.put('/message', async(req, res) => {
 
 router.delete('/message', async(req, res) => {
     try {
-        //console.log(req.query)
+        console.log(req.query)
         const res = await deleteDoc(doc(db, "messages", req.query.id))
         // const ref = await db.collection('messages').doc(req.query.id).delete()
         return res.status(200).json({

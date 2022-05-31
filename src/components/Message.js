@@ -1,21 +1,23 @@
-import { Button, IconButton, Paper, TextField, Typography } from '@mui/material';
+import { IconButton, Paper, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { useSearchParams } from 'react-router-dom';
 
 function Message(props) {
   const {username, text, createdAt, doc_id} = props.msg;
-
+  const {isMe, update} = props;
   const [isEditing, setIsEditing] = useState(false)
+  const [currVal, setCurrVal] = useState(text);
 
-  const onDelete = (id) => {
+  const onDelete = (doc_id) => {
       //alert('you are about to delete. Are you sure?')
       //console.log(id)
-      axios.delete('http://localhost:9000/chat/message?id=' + id)
+      axios.delete('/chat/message', {
+        id: doc_id,
+      })
       .then(res => console.log(res))
       .catch(err => console.log(err))
   }
@@ -32,6 +34,7 @@ function Message(props) {
       message: e.target.value
     }).catch(err => console.log(err))
     setIsEditing(false)
+    update();
   }
   }
 
@@ -45,15 +48,18 @@ function Message(props) {
           <Box display='flex' alignItems='center' justifyContent='center'>
             <div>
                 <Typography variant='h5'>Message from {username} at {time}</Typography>
-                {isEditing ? <TextField onKeyDown={(e) => editMessage(e, doc_id)}/> :
+                {isEditing ? <TextField value={currVal} onChange={(e) => setCurrVal(e.target.value)} onKeyDown={(e) => editMessage(e, doc_id)}/> :
                 <Typography variant='h4'>{text}</Typography>}
             </div>
-            <IconButton color='primary' onClick={() => onDelete(doc_id)}>
-                <DeleteIcon />
-            </IconButton>
-            <IconButton color='primary' onClick={() => onEdit(doc_id)}>
-                <EditIcon />
-            </IconButton>
+            {isMe?
+            <div>
+              <IconButton color='primary' onClick={() => onEdit(doc_id)}>
+                  <EditIcon />
+              </IconButton>
+              <IconButton color='primary' onClick={() => onDelete(doc_id)}>
+                  <DeleteIcon />
+              </IconButton>
+            </div>:null}
           </Box>          
       </Paper>
   )

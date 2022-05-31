@@ -3,7 +3,7 @@ const { getFirestore } = require("firebase/firestore");
 // https://indepth.dev/posts/1084/building-an-api-with-firebase#database-calls
 // var admin = require("firebase-admin");
 
-var serviceAccount = require("./permissions.json");
+var serviceAccount = require("../permissions.json");
 
 
 const app = initializeApp({...serviceAccount, projectId: serviceAccount.project_id});
