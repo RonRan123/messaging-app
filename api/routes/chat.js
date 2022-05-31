@@ -71,6 +71,21 @@ router.post('/message', async(req, res) => {
     }
 })
 
+router.put('/message', async(req, res) => {
+    try {
+        const ref = db.collection('messages').doc(req.body.id)
+        const update = await ref.update({text: req.body.message})
+
+        return res.status(200).json({
+            message: 'Message updated'
+        })
+    }
+    catch {
+        console.log(err)
+        return res.status(500).send(err)
+    }
+})
+
 router.delete('/message', async(req, res) => {
     try {
         //console.log(req.query)
