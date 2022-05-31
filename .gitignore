@@ -26,3 +26,5 @@ yarn-error.log*
 permissions.json
 package-lock.json
 api/node_modules
+api/node_modules/.package-lock.json
+package-lock.json
